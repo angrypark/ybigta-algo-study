@@ -13,9 +13,9 @@ public:
         std::getline(std::cin, text);
     }
 
-    std::string solve(std::string str, bool root = false)
+    std::string solve(std::string str)
     {
-        if (str.size() == 1) return str;
+        if (str.size() == 1) return str; 
 
         std::vector<std::string> buffer(4);
 
