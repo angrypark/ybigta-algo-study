@@ -34,13 +34,13 @@ public:
     int solve(int from = 0, int to = -1)
     {
         if (to == -1) to = n;
-        if (from == to - 1) return heights[from];
+        if (from >= to - 1) return heights[from];
 
         int mid = from + (to - from) / 2;
 
         int max = std::max(solve(from, mid), solve(mid, to));
 
-        int left = mid, right = mid + 1;
+        int left = mid - 1, right = mid;
         int h = std::min(heights[left], heights[right]);
 
         int area = (right - left + 1) * h;
@@ -48,12 +48,10 @@ public:
             max = area;
 
         while (left > from || right < to - 1) {
-            if (right < to - 1 && (left == from || heights[left - 1] < heights[right + 1])) {
-                right++;
-                h = std::min(h, heights[right]);
+            if (right < to - 1 && ((left == from) || (heights[left - 1] < heights[right + 1]))) {
+                h = std::min(h, heights[++right]);
             } else {
-                left--;
-                h = std::min(h, heights[left]);
+                h = std::min(h, heights[--left]);
             }
 
             area = (right - left + 1) * h;

@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#define BIG_INT 9999
+
 std::vector<int> intSplit(const std::string& str, char delim = ' ')
 {
     std::string s;
@@ -28,47 +30,46 @@ class ClockSync
         {3, 4, 5, 9, 13}
     };
     std::vector<int> clocks;
-    int min = INT_MAX;
+    int min = BIG_INT;
 public:
     ClockSync()
     {
         std::string line;
         std::getline(std::cin, line);
         clocks = intSplit(line);
+        for (int& i : clocks)
+            i = i % 12;
     }
 
     void solve(int start = 0, int count = 0)
     {
-        if (start > 9) return;
-        if (allTwelve() && count < min)
+        if (allTwelve() && count < min) {
             min = count;
+            return;
+        }
+        if (start > 9) return;
 
         for (int r = 0; r < 4; r++) {
-            press(start, r);
             solve(start + 1, count + r);
-            press(start, r, true);
+            press(start);
         }
     }
 
     int answer()
     {
-        return (min < INT_MAX) ? min : -1;
+        return (min < BIG_INT) ? min : -1;
     }
 
-    void press(int idx, int r, bool rewind = false)
+    void press(int idx)
     {
-        int move = rewind ? -3 : 3;
-        for (int i : switches[idx]) {
-            clocks[i] += move * r;
-            if (clocks[i] > 12) clocks[i] -= 12;
-            else if (clocks[i] <= 0) clocks[i] += 12;
-        }
+        for (int i : switches[idx])
+            clocks[i] = (clocks[i] + 3) % 12;
     }
 
     bool allTwelve()
     {
         for (int hour : clocks)
-            if (hour != 12)
+            if (hour != 0)
                 return false;
         return true;
     }

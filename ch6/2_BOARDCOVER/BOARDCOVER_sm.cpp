@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <tuple>
 #include <vector>
 
 std::vector<int> intSplit(const std::string& str, char delim = ' ')
@@ -55,8 +56,8 @@ public:
         for (int i = 0; i < height; i++)
             for (int j = 0; j < width; j++)
                 if (board[i][j] == 0)
-                    return {i, j};
-        return {-1,-1};
+                    return std::make_tuple(i, j);
+        return std::make_tuple(-1,-1);
     }
 
     int countCoverings()
@@ -92,9 +93,11 @@ public:
     bool isSafe(int x, int y, int r)
     {
         for (int i = 0; i < 3; i++) {
-            int dy = pattern[r][i][0];
-            int dx = pattern[r][i][1];
-            if (board[y + dy][x + dx] == 1) return false;
+            int target_y = y + pattern[r][i][0];
+            int target_x = x + pattern[r][i][1];
+            if ((target_x < 0) || (target_x >= width) || 
+                (target_y < 0) || (target_y >= height)) return false;
+            if (board[target_y][target_x] == 1) return false;
         }
         return true;
     }
@@ -109,7 +112,8 @@ int main(int argc, const char* argv[])
 
     for (int i = 0; i < num_cases; i++) {
         BoardCover x;
-        std::cout << x.countCoverings() << std::endl;
+        int answer = x.countCoverings();
+        std::cout << answer << std::endl;
     }
     return 0;
 }

@@ -20,7 +20,7 @@ public:
         std::vector<std::string> buffer(4);
 
         int offset = (str[0] == 'x') ? 1 : 0;
-        bool mixed = (str[0] == 'x') ? true : false;
+        bool mixed = (str[0] == 'x') ? true : false;        
 
         for (int i = 0; i < 4; i++) {
             if (str[i + offset] != 'x')
@@ -44,7 +44,7 @@ int main(int argc, const char* argv[])
 
     for (int i = 0; i < num_cases; i++) {
         Solution sol;
-        auto answer = sol.solve(sol.text, true);
+        auto answer = sol.solve(sol.text);
         std::cout << answer << std::endl;
     }
     return 0;
