@@ -7,7 +7,9 @@ def mark(i, matched):
     matched = deepcopy(matched)
     matched[i] = True
     return matched
+
 C = int(stdin.readline())
+
 for _ in range(C):
     n, m = stdin.readline().split()
     n, m = int(n), int(m)
