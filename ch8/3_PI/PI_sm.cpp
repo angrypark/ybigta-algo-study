@@ -14,10 +14,7 @@ std::string getStr()
     return s;
 }
 
-int getInt()
-{
-    return std::stoi(getStr());
-}
+int getInt() { return std::stoi(getStr()); }
 
 class Solution
 {

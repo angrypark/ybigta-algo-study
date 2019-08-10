@@ -15,10 +15,7 @@ std::string getStr()
     return s;
 }
 
-int getInt()
-{
-    return std::stoi(getStr());
-}
+int getInt() { return std::stoi(getStr()); }
 
 std::vector<int> getIntVec()
 {

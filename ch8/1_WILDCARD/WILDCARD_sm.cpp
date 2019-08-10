@@ -53,15 +53,15 @@ private:
             if (regex.size() == r)
                 return ret = true;
             else if (regex[r] == '*')
-                return match(s, r + 1);
+                return ret = match(s, r + 1);
             else
                 return ret = false;
         }
 
         if (regex[r] == '?' || str[s] == regex[r])
-            return match(s + 1, r + 1);
+            return ret = match(s + 1, r + 1);
         if (regex[r] == '*')
-            return match(s, r + 1) || match(s + 1, r);
+            return ret = match(s, r + 1) || match(s + 1, r);
         return ret = false;
     }
 
