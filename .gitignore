@@ -1,10 +1,18 @@
 
 # Created by https://www.gitignore.io/api/c++,python,jupyternotebooks
 # Edit at https://www.gitignore.io/?templates=c++,python,jupyternotebooks
+# macOS
+*/.DS_Store
+.DS_Store
 
 ### C++ ###
 # Prerequisites
 *.d
+*main
+*Makefile
+
+# Semin
+*input.txt
 
 # Compiled Object files
 *.slo
